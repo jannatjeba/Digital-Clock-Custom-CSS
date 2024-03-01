@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock Using JavaScript</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="body">
+      <div class="container">
+        <div class="clock">
+          <span id="hrs">00</span>
+          <span>:</span>
+          <span id="min">00</span>
+          <span>:</span>
+          <span id="sec">00</span>
+          <span id="indicator">AM</span>
+        </div>
+      </div>
+    </div>
+    <h3>
+      Made By
+      <a href="https://github.com/jannatjeba" target="blank">Jannatul</a>
+    </h3>
+
+    <script>
+      let hrs = document.getElementById("hrs");
+      let min = document.getElementById("min");
+      let sec = document.getElementById("sec");
+      let indicator = document.getElementById("indicator");
+
+      setInterval(() => {
+        let currentTime = new Date();
+
+        hrs.innerHTML =
+          (currentTime.getHours() < 10 ? "0" : "") + currentTime.getHours();
+
+        min.innerHTML =
+          (currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes();
+        sec.innerHTML =
+          (currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds();
+
+        const hour = parseInt(hrs.innerHTML);
+
+        if (hour >= 12) {
+          indicator.innerText = "PM";
+          if (hour - 12 < 10) {
+            hrs.innerText = "0" + (hour - 12);
+          } else {
+            hrs.innerText = hour - 12;
+          }
+        } else {
+          indicator.innerText = "AM";
+          if (hour === 0) {
+            hrs.innerText = "12"; // Midnight should display as 12 AM
+          } else if (hour < 10) {
+            hrs.innerText = "0" + hour;
+          }
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
